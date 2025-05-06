@@ -9,10 +9,10 @@ using namespace std;
 
 Memoria::Memoria()
 {
-    memoria.resize(128, vector<unsigned int>(16, 0)); // Inicializa 128 bloques de 16 bytes
+    memoria.resize(2032); // Inicializa 2032 datos de 1 byte (8 bits) cada uno
 }
 
-void Memoria::inicializarDesdeArchivo(const string &archivo)
+/*void Memoria::inicializarDesdeArchivo(const string &archivo)
 {
     ifstream entrada(archivo);
     if (!entrada.is_open())
@@ -21,13 +21,13 @@ void Memoria::inicializarDesdeArchivo(const string &archivo)
     }
     else
     {
-        string linea;
-        while (getline(entrada, linea))
+        string dato;
+        while (getline(entrada, dato))
         {
-            cout << "LINEA LEIDA: " << linea << endl;
-            if (!linea.empty())
+            cout << "dato LEIDA: " << dato << endl;
+            if (!dato.empty())
             {
-                istringstream stream(linea);
+                istringstream stream(dato);
                 string direccionStr;
                 stream >> direccionStr;
 
@@ -46,11 +46,11 @@ void Memoria::inicializarDesdeArchivo(const string &archivo)
                         }
                     }
 
-                    /*
+
 
                     Aca se verifica que la direccion de memoria sea valido porque la estamos dando en decimal de 0 - 127
 
-                    */
+
 
                     int direccion = 0;
                     if (direccionValida)
@@ -61,15 +61,15 @@ void Memoria::inicializarDesdeArchivo(const string &archivo)
                             int bytesLeidos = 0;
                             while (bytesLeidos < 16)
                             {
-                                string byteHex;
-                                stream >> byteHex;
+                                string dato;
+                                stream >> dato;
 
-                                if (!byteHex.empty())
+                                if (!dato.empty())
                                 {
                                     bool byteValido = true;
-                                    for (size_t j = 0; j < byteHex.size(); j++)
+                                    for (size_t j = 0; j < dato.size(); j++)
                                     {
-                                        if (!isxdigit(byteHex[j]))
+                                        if (!isxdigit(dato[j]))
                                         {
                                             byteValido = false;
                                         }
@@ -77,7 +77,7 @@ void Memoria::inicializarDesdeArchivo(const string &archivo)
 
                                     if (byteValido)
                                     {
-                                        int valor = stoi(byteHex, nullptr, 16);
+                                        int valor = stoi(dato, nullptr, 16);
                                         memoria[direccion][bytesLeidos] = static_cast<unsigned char>(valor);
                                         cout << "Escribiendo en direccion " << hex << (direccion + bytesLeidos) << ": "
                                              << hex << (int)memoria[direccion][bytesLeidos] << "\n";
@@ -99,7 +99,7 @@ void Memoria::inicializarDesdeArchivo(const string &archivo)
                 }
                 else
                 {
-                    cerr << "Formato invalido en la linea: " << linea << "\n";
+                    cerr << "Formato invalido en la dato: " << dato << "\n";
                 }
             }
         }
@@ -107,23 +107,91 @@ void Memoria::inicializarDesdeArchivo(const string &archivo)
         entrada.close();
         cout << "Memoria inicializada desde " << archivo << "\n";
     }
+}*/
+
+void Memoria::inicializarDesdeArchivo(const string &archivo)
+{
+    ifstream entrada(archivo);
+    if (!entrada.is_open())
+    {
+        cerr << "Error al abrir archivo " << archivo << "\n";
+        return;
+    }
+
+    string linea;
+    int direccionBase = 0;
+
+    while (getline(entrada, linea))
+    {
+        // cout << "Linea leida: " << linea << endl; activar linea para debug
+
+        if (linea.empty())
+        {
+            cerr << "Linea vacia encontrada, se ignora\n";
+        }
+        else
+        {
+            istringstream stream(linea);
+            string token;
+            stream >> token;
+
+            // Eliminar prefijo "0x" si existe
+            if (token.size() >= 2 && token[0] == '0' && (token[1] == 'x' || token[1] == 'X'))
+            {
+                token = token.substr(2);
+            }
+
+            bool byteValido = true;
+            for (char caracter : token)
+            {
+                if (!isxdigit(caracter))
+                {
+                    byteValido = false;
+                }
+            }
+
+            if (byteValido)
+            {
+                int valor = stoi(token, nullptr, 16);
+                if (direccionBase >= static_cast<int>(memoria.size()))
+                {
+                    cerr << "Direccion fuera de rango: " << direccionBase << "\n";
+                }
+                else
+                {
+                    memoria[direccionBase] = static_cast<unsigned int>(valor);
+                    // cout << "Escribiendo en direccion " << hex << direccionBase << ": "
+                    //      << hex << memoria[direccionBase] << "\n"; activar linea para debug
+                }
+                direccionBase++;
+            }
+            else
+            {
+                cerr << "Dato inválido (no hexadecimal): " << token << "\n";
+            }
+        }
+    }
+
+    entrada.close();
+    cout << "Memoria inicializada desde " << archivo << "\n";
 }
-void Memoria::leerBloque(int direccionBase, ostream &salida) const
+
+void Memoria::leerDato(long long int direccionBase, ostream &salida) const
 {
     if (direccionBase < 0 || direccionBase >= static_cast<int>(memoria.size()))
     {
         salida << "Error: Dirección " << direccionBase << " fuera de rango\n";
         return;
     }
-    for (const auto &byte : memoria[direccionBase])
-    {
-        salida << setw(2) << setfill('0') << hex << static_cast<int>(byte) << "\n";
-    }
+    // cout << "IMPRIMIENDO DATO EN DIRECCION " << direccionBase << endl;
+    // cout << "DATO EN DIRECCION " << *(memoria.begin() + direccionBase) << ": ";
+    auto it = memoria.begin() + direccionBase;
+    salida << setw(2) << setfill('0') << hex << static_cast<int>(*it) << "\n";
 }
 
 void Memoria::escribirBloque(int direccionBase, const vector<unsigned int> &bloque)
 {
-    memoria[direccionBase / 16] = bloque;
+    // memoria[direccionBase / 16] = bloque;
 }
 
 int Memoria::getTamanio() const

@@ -138,13 +138,16 @@ bool Cache::escribir(int direccion, unsigned int nuevoD)
         cout << "Escribiendo en la cache: " << hex << static_cast<int>(nuevoD) << endl;
         ans = true; // Se encuentra el dato
         setEstado(HIT);
-        actualizarLRU(bloqueCache); // Actualiza el contador LRU
+        // actualizarLRU(bloqueCache); // Actualiza el contador LRU revisar el actualizar LRU
         conteoAccesos++;
     }
     else
     {
         cout << "No se encuentra el bloque en la cache" << endl;
         setEstado(MISS);
+        subirBloque(bloques[bloqueCache].getDatos(), blockAddress); // Subir bloque a cache
+        setDato(bloqueCache, offset, nuevoD);                       // Escribir dato en la cache
+        // actualizarLRU(bloqueCache);                                 // Actualiza el contador LRU no funciona aun
         conteoMisses++;
         ans = false; // No se encuentra el dato
     }

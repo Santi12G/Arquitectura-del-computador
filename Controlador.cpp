@@ -127,9 +127,9 @@ void Controlador::imprimirMemoria() const
 
     archivo << "Contenido de la Memoria:\n";
 
-    for (int i = 0; i < 128; i++)
+    for (long long int i = 0; i < 2032; i++)
     {
-        memoria.leerBloque(i, archivo); // imprime en archivo
+        memoria.leerDato(i, archivo); // imprime en archivo
     }
 
     archivo.close();
