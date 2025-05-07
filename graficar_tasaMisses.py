@@ -1,4 +1,4 @@
-import sys
+import sys 
 import matplotlib.pyplot as plt
 
 def graficar_tasa_misses(nombre_archivo):
@@ -17,16 +17,24 @@ def graficar_tasa_misses(nombre_archivo):
                     tasa_misses = float(linea.strip().split(":")[1].replace('%', ''))
 
             tasa_hits = 100.0 - tasa_misses
-
+            
             # Gráfico de barras
             etiquetas = ['Misses', 'Hits']
             valores = [tasa_misses, tasa_hits]
             colores = ['red', 'green']
 
-            plt.bar(etiquetas, valores, color=colores)
+            barras = plt.bar(etiquetas, valores, color=colores)
+
+            # Agregar texto debajo de cada barra
+            cantidades = [total_misses, total_accesos - total_misses]
+            for barra, cantidad in zip(barras, cantidades):
+                x = barra.get_x() + barra.get_width() / 2
+                y = -5  # valor por debajo del eje X
+                plt.text(x, y, f"{cantidad}", ha='center', va='top', fontsize=10)
+
             plt.title('Tasa de Misses vs Hits')
             plt.ylabel('Porcentaje (%)')
-            plt.ylim(0, 100)
+            plt.ylim(-10, 100)  # Ampliar el límite inferior para que se vea el texto
             plt.grid(axis='y', linestyle='--', alpha=0.7)
             plt.show()
 
