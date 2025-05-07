@@ -25,6 +25,7 @@ int main()
     procesador.imprimirMemoria(); // Guardar la memoria en un archivo
     // @Memoria: guardar contenido luego de procesar todas las operaciones
 
+    procesador.exportarResultados("resultados.txt"); // Exportar resultados a un archivo
     /*
 
 

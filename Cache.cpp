@@ -45,6 +45,12 @@ int Cache::manageBloqueLibre()
 
 bool Cache::leer(unsigned int direccion)
 {
+    cout << "PRE POLITICA LRU: " << lruPolicy.front() << endl;
+    for (int i = 0; i < 32; i++)
+    {
+        cout << lruPolicy[i] << " ";
+    }
+    cout << endl;
     bool ans = false;
     conteoAccesos++;
     int blockAddress = direccion / 16; //

@@ -32,11 +32,10 @@ private:
     int conteoMisses;
     EstadoCache estadoActual;
     int bloqueLibre;
-    deque<unsigned int> lruPolicy; // Vector para almacenar la politica LRU
 
 public:
     Cache();
-
+    deque<unsigned int> lruPolicy; // Vector para almacenar la politica LRU
     void leerLruPolicyQueue();
     bool leer(unsigned int);          // Lee un dato de la caché
     bool escribir(int, unsigned int); // Escribe un dato en la caché

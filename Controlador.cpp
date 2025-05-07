@@ -119,6 +119,8 @@ bool Controlador::procesarOperacion(int direccion, bool esEscritura, unsigned ch
         {
             cache.actualizarLRU(direccion); // Actualizar LRU si hubo hit
         }
+        cout << "POST POLITICA LRU: " << cache.lruPolicy.front() << endl;
+        cout << "TAMANIO POLITICA LRU: " << dec << static_cast<int>(cache.lruPolicy.size()) << endl;
     }
     return esHit; // Retornar si hubo hit
 }

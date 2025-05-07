@@ -2,7 +2,7 @@ Contenido de la Cache:
 Etiqueta: 0 | LRU: 0
 64 75 4d 76 4f 2c 5c c6 56 48 da 59 d5 4e 59 6d 
 Etiqueta: 1 | LRU: 0
-91 aa 51 a7 79 fd 7d e2 a1 04 8c cf b8 6e 3f 6f 
+91 ac 51 a7 79 fd 7d e2 a1 04 8c cf b8 6e 3f 6f 
 Etiqueta: 2 | LRU: 0
 7d 4e e6 9d 31 a1 79 6d 58 f8 0a fa c3 df 9a 2a 
 Etiqueta: 3 | LRU: 0
@@ -41,8 +41,8 @@ Etiqueta: 19 | LRU: 0
 c0 4a 71 87 fe 36 69 a4 ed eb 2b 1c 81 76 c1 f1 
 Etiqueta: 20 | LRU: 0
 96 98 cb e7 22 6d 92 31 95 13 3e cc 3c 54 60 aa 
-Etiqueta: 34 | LRU: 0
-99 b5 bc ff c8 ea cb df 52 db d7 cb 1f 04 10 33 
+Etiqueta: 64 | LRU: 0
+07 75 f6 0a c7 b6 df 1a 96 da 08 37 13 3c e9 e7 
 Etiqueta: 22 | LRU: 0
 03 69 f1 f2 65 60 f1 0e 27 cb 86 69 18 50 0a 85 
 Etiqueta: 23 | LRU: 0
