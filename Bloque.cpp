@@ -69,8 +69,12 @@ void Bloque::setDatos(const vector<unsigned int> &d)
 
 void Bloque::setDato(int indice, unsigned int valor)
 {
+    cout << "indice: " << indice << endl;
+
     if (indice >= 0 && indice < static_cast<int>(datos.size()))
     {
+        cout << "FIRST REVISION: " << endl;
+        cout << "datos [indice] " << datos[indice] << endl;
         datos[indice] = valor; // Actualiza el dato en la posición especificada
     }
     else

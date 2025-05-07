@@ -67,7 +67,7 @@ bool Cache::leer(unsigned int direccion)
         // cout << "dato: " << hex << static_cast<int>((bloques[blockAddress]).getDato(offset)) << endl;
         ans = true; // Se encuentra el dato
         setEstado(HIT);
-        actualizarLRU(bloqueCache); // Actualiza el contador LRU   --> recordar que hay que implementarlo con un deque para ir metiendo los recientemente usados en la parte de atras
+        // actualizarLRU(bloqueCache); // Actualiza el contador LRU   --> recordar que hay que implementarlo con un deque para ir metiendo los recientemente usados en la parte de atras
     }
     else
     {
@@ -124,7 +124,6 @@ void Cache::subirBloque(vector<unsigned int> &bloque, int direccionBase)
         bloques[indiceReemplazar].setDatos(bloque);           // Subir bloque a cache
         bloques[indiceReemplazar].setEtiqueta(direccionBase); // Etiqueta del bloque
         bloques[indiceReemplazar].setValido(true);
-
         // cout << "Politica lru third revision: " << lruPolicy.front() << endl;
     }
     if (lruSize == 0)
@@ -135,15 +134,16 @@ void Cache::subirBloque(vector<unsigned int> &bloque, int direccionBase)
         lruPolicy.push_back(direccionBase);
         // cout << "Terminado el reemplazo del bloque " << etiquetaBloqueReemplazar << " por el bloque " << direccionBase << endl;
     }
+
     /*cout << "TOMANDO DATOS DE LA CACHE " << endl;
     for (int i = 0; i < 32; i++)
     {
 
-        for (const auto &dato : bloques[i].getDatos())
-        {
-            cout << hex << static_cast<int>(dato) << " ";
-        }
-        cout << endl;
+    for (const auto &dato : bloques[i].getDatos())
+    {
+        cout << hex << static_cast<int>(dato) << " ";
+    }
+    cout << endl;
     }*/
 }
 
@@ -169,8 +169,8 @@ bool Cache::escribir(int direccion, unsigned int nuevoD)
     if (validBloque)
     {
         // cout << "Bloque valido: " << validBloque << endl;
-        setDato(bloqueCache, offset, nuevoD); // Escribir dato en la cache
-        cout << "Escribiendo en la cache: " << hex << static_cast<int>(nuevoD) << endl;
+        // setDato(bloqueCache, offset, nuevoD); // Escribir dato en la cache
+        // cout << "Escribiendo en la cache: " << hex << static_cast<int>(nuevoD) << endl;
         ans = true; // Se encuentra el dato
         setEstado(HIT);
         // actualizarLRU(bloqueCache); // Actualiza el contador LRU revisar el actualizar LRU
@@ -180,17 +180,15 @@ bool Cache::escribir(int direccion, unsigned int nuevoD)
     {
         cout << "No se encuentra el bloque en la cache" << endl;
         setEstado(MISS);
-        subirBloque(bloques[bloqueCache].getDatos(), blockAddress); // Subir bloque a cache
-        setDato(bloqueCache, offset, nuevoD);                       // Escribir dato en la cache
-        // actualizarLRU(bloqueCache);                                 // Actualiza el contador LRU no funciona aun
+        // subirBloque(bloques[bloqueCache].getDatos(), blockAddress); // Subir bloque a cache
+        // setDato(bloqueCache, offset, nuevoD);                       // Escribir dato en la cache
+        //  actualizarLRU(bloqueCache);                                 // Actualiza el contador LRU no funciona aun
         conteoMisses++;
         ans = false; // No se encuentra el dato
     }
-
+    cout << "Saliendo funcion escribir cache interna" << endl;
     return ans;
 }
-
-// bool Cache::escribir(int direccion, unsigned char nuevoDato) {}
 
 void Cache::guardarEnArchivo(const string &nombreArchivo)
 {
@@ -295,11 +293,17 @@ int Cache::getConteoMisses() const
 
 void Cache::setDato(int direccionBloque, int offset, unsigned int nuevoDato)
 {
+    cout << "direccion bloque: " << dec << direccionBloque << endl;
+    cout << "Setting dato en la cache: " << hex << static_cast<int>(nuevoDato) << endl;
+    cout << "offset: " << offset << endl;
     for (int i = 0; i < 32; i++)
     {
         if (bloques[i].getEtiqueta() == direccionBloque)
         {
+            cout << "Se encontro el bloque " << bloques[i].getEtiqueta() << " en la memoria cache" << endl;
             bloques[i].setDato(offset, nuevoDato); // Escribir dato en la cache
+            cout << "Escribiendo en la cache: " << hex << static_cast<int>(nuevoDato) << endl;
         }
     }
+    // bloques[direccionBloque].setDato(offset, nuevoDato);
 }

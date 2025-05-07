@@ -1,4 +1,3 @@
-Contenido de la Memoria:
 64
 75
 4d
@@ -16,7 +15,7 @@ d5
 59
 6d
 91
-ac
+aa
 51
 a7
 79
@@ -546,7 +545,7 @@ e8
 99
 b5
 bc
-5f
+ff
 c8
 ea
 cb

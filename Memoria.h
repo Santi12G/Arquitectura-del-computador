@@ -21,7 +21,7 @@ public:
 
     void leerDato(long long int, ostream &) const;
     void escribirBloque(int, const vector<unsigned int> &);
-
+    void modificarDato(int, unsigned char);
     int getTamanio() const;
     Memoria &getMemoria();
 

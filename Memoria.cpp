@@ -229,3 +229,11 @@ const vector<unsigned int> Memoria::obtenerBloque(unsigned int direccion) const
 
     return res; // Retornar el bloque
 }
+
+void Memoria::modificarDato(int direccion, unsigned char dato)
+{
+    int dir = static_cast<int>(direccion); // Convertir a entero
+    memoria[dir] = dato;                   // Modificar el dato en la memoria
+    cout << "Modificando DRAM en direccion " << dec << dir << ": "
+         << hex << static_cast<int>(memoria[dir]) << "\n"; // Mostrar el dato modificado
+}
