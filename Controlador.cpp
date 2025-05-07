@@ -73,7 +73,7 @@ bool Controlador::procesarOperacion(int direccion, bool esEscritura, unsigned ch
             cout << "Leyendo de la memoria DRAM...\n";
             // Leer el bloque correspondiente desde la memoria principal
             vector<unsigned int> bloque = memoria.obtenerBloque(direccion / 16);
-
+            /*
             cout << "En funcion controlador, bloque leido: " << endl;
 
             for (unsigned int dato : bloque)
@@ -82,7 +82,7 @@ bool Controlador::procesarOperacion(int direccion, bool esEscritura, unsigned ch
             }
             cout << endl;
             // Subir el bloque a la caché
-            cout << "Direccion a subir: " << direccion << endl;
+            cout << "Direccion a subir: " << direccion << endl;*/
             cache.subirBloque(bloque, direccion / 16);
         }
 

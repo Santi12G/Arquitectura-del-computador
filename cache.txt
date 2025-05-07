@@ -1,65 +1,65 @@
 Contenido de la Caché:
-Etiqueta: 0 | LRU: 2
-00 00 01 01 00 00 00 00 00 00 00 00 00 00 00 00 
-Etiqueta: 1 | LRU: 2
-00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
-Etiqueta: 2 | LRU: 2
-00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
-Etiqueta: 3 | LRU: 2
-00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
-Etiqueta: 20 | LRU: 1
-00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
-Etiqueta: 5 | LRU: 1
-00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
-Etiqueta: 6 | LRU: 1
-00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
-Etiqueta: 7 | LRU: 1
-00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
-Etiqueta: 8 | LRU: 1
-00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
-Etiqueta: 9 | LRU: 1
-00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
-Etiqueta: a | LRU: 1
-00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
-Etiqueta: b | LRU: 1
-00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
-Etiqueta: c | LRU: 1
-00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
-Etiqueta: d | LRU: 1
-00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
-Etiqueta: e | LRU: 1
-00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
-Etiqueta: f | LRU: 1
-00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
-Etiqueta: 10 | LRU: 1
-00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
-Etiqueta: 11 | LRU: 1
-00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
-Etiqueta: 12 | LRU: 1
-00 00 00 01 00 00 00 00 00 00 00 00 00 00 00 00 
-Etiqueta: 13 | LRU: 1
-00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
-Etiqueta: 14 | LRU: 1
-00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
-Etiqueta: 15 | LRU: 1
-00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
-Etiqueta: 16 | LRU: 1
-00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
-Etiqueta: 17 | LRU: 1
-00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
-Etiqueta: 18 | LRU: 1
-00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
-Etiqueta: 19 | LRU: 1
-00 00 00 00 a176ffeb 40ad 103dfa0 1031f38 210021 00 00 00 00 00 00 00 
-Etiqueta: 1a | LRU: 1
-00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
-Etiqueta: 1b | LRU: 1
-00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
-Etiqueta: 1c | LRU: 1
-00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
-Etiqueta: 1d | LRU: 1
-00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
-Etiqueta: 1e | LRU: 1
-00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
-Etiqueta: 1f | LRU: 1
-00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+Etiqueta: ffffffff | LRU: 0
+ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff 
+Etiqueta: ffffffff | LRU: 0
+ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff 
+Etiqueta: ffffffff | LRU: 0
+ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff 
+Etiqueta: ffffffff | LRU: 0
+ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff 
+Etiqueta: ffffffff | LRU: 0
+ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff 
+Etiqueta: ffffffff | LRU: 0
+ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff 
+Etiqueta: ffffffff | LRU: 0
+ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff 
+Etiqueta: ffffffff | LRU: 0
+ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff 
+Etiqueta: ffffffff | LRU: 0
+ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff 
+Etiqueta: ffffffff | LRU: 0
+ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff 
+Etiqueta: ffffffff | LRU: 0
+ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff 
+Etiqueta: ffffffff | LRU: 0
+ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff 
+Etiqueta: ffffffff | LRU: 0
+ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff 
+Etiqueta: ffffffff | LRU: 0
+ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff 
+Etiqueta: ffffffff | LRU: 0
+ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff 
+Etiqueta: ffffffff | LRU: 0
+ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff 
+Etiqueta: ffffffff | LRU: 0
+ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff 
+Etiqueta: ffffffff | LRU: 0
+ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff 
+Etiqueta: ffffffff | LRU: 0
+ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff 
+Etiqueta: ffffffff | LRU: 0
+ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff 
+Etiqueta: ffffffff | LRU: 0
+ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff 
+Etiqueta: ffffffff | LRU: 0
+ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff 
+Etiqueta: ffffffff | LRU: 0
+ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff 
+Etiqueta: ffffffff | LRU: 0
+ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff 
+Etiqueta: ffffffff | LRU: 0
+ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff 
+Etiqueta: ffffffff | LRU: 0
+ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff 
+Etiqueta: ffffffff | LRU: 0
+ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff 
+Etiqueta: ffffffff | LRU: 0
+ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff 
+Etiqueta: ffffffff | LRU: 0
+ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff 
+Etiqueta: ffffffff | LRU: 0
+ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff 
+Etiqueta: ffffffff | LRU: 0
+ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff 
+Etiqueta: ffffffff | LRU: 0
+ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff 
