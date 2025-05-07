@@ -206,9 +206,12 @@ string Memoria::obtenerComoTexto() const
 const vector<unsigned int> Memoria::obtenerBloque(unsigned int direccion) const
 {
     cout << "OBTENIENDO BLOQUE FUNCION " << dec << direccion << endl;
-    vector<unsigned int> res(16); // Crear un bloque de 16 bytes
-    int direccionBloque = direccion / 16;
+    vector<unsigned int> res; // Crear un bloque de 16 bytes
+    int direccionBloque = direccion;
     int direccionInicio = direccionBloque * 16; // Calcular la dirección de inicio del bloque
+    cout << "Direccion bloque: " << dec << direccionBloque << endl;
+    cout << "Direccion inicio: " << dec << direccionInicio << endl;
+    cout << "Direccion fin: " << dec << direccionInicio + 16 << endl;
     for (auto it = memoria.begin() + direccionInicio; it != memoria.begin() + direccionInicio + 16; it++)
     {
         res.push_back(*it);                          // Copiar el bloque de memoria

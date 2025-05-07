@@ -22,7 +22,8 @@ int Bloque::getEtiqueta() const
 
 void Bloque::setEtiqueta(int e)
 {
-    etiqueta = e;
+    int et = e / 16;
+    etiqueta = et;
 }
 
 int Bloque::getContadorLRU() const

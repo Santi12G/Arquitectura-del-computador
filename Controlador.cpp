@@ -66,6 +66,7 @@ bool Controlador::procesarOperacion(int direccion, bool esEscritura, unsigned ch
     else
     {
         cout << "Leyendo de la memoria cache...\n";
+        cout << "direccion directa de DRAM: " << dec << static_cast<int>(direccion) << endl;
         bool esHit = cache.leer(direccion);
 
         if (!esHit)
@@ -73,6 +74,13 @@ bool Controlador::procesarOperacion(int direccion, bool esEscritura, unsigned ch
             cout << "Leyendo de la memoria DRAM...\n";
             // Leer el bloque correspondiente desde la memoria principal
             vector<unsigned int> bloque = memoria.obtenerBloque(direccion / 16);
+            cout << "Datos leidos de la memoria DRAM: " << endl;
+            for (unsigned int dato : bloque)
+            {
+                cout << hex << static_cast<int>(dato) << " ";
+            }
+            cout << endl;
+
             /*
             cout << "En funcion controlador, bloque leido: " << endl;
 
@@ -83,7 +91,11 @@ bool Controlador::procesarOperacion(int direccion, bool esEscritura, unsigned ch
             cout << endl;
             // Subir el bloque a la caché
             cout << "Direccion a subir: " << direccion << endl;*/
-            cache.subirBloque(bloque, direccion / 16);
+            cache.subirBloque(bloque, direccion);
+        }
+        else
+        {
+            cache.actualizarLRU(direccion); // Actualizar LRU si hubo hit
         }
 
         return esHit; // Retornar si hubo hit

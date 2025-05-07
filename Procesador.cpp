@@ -65,7 +65,7 @@ void Procesador::leerArchivoOperaciones(const string &archivo)
         string linea_limpia;
         while (getline(entrada, linea_limpia))
         {
-            // cout << "LINEA LEIDA: " << linea_limpia << endl;
+            cout << "LINEA LEIDA: " << linea_limpia << endl;
             // Limpieza manual de espacios
 
             if (!linea_limpia.empty())
