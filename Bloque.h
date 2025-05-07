@@ -9,13 +9,13 @@ class Bloque
 {
 private:
     int etiqueta;
-    vector<unsigned int> datos;
+
     int contadorLRU;
     bool valido;
 
 public:
     Bloque();
-
+    vector<unsigned int> datos;
     void restartLRU();
     int getEtiqueta() const;
     void setEtiqueta(int);

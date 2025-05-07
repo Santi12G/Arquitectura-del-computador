@@ -18,7 +18,6 @@ public:
     void mostrarResultados();
     void exportarResultados(const string &);
 
-    void imprimirCache() const;
     void imprimirMemoria() const;
 };
 

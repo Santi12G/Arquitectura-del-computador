@@ -13,15 +13,15 @@ using namespace std;
 class Memoria
 {
 private:
-    vector<vector<unsigned int>> memoria;
+    vector<unsigned int> memoria;
 
 public:
     Memoria();
     void inicializarDesdeArchivo(const string &);
 
-    void leerBloque(int, ostream &) const;
+    void leerDato(long long int, ostream &) const;
     void escribirBloque(int, const vector<unsigned int> &);
-
+    void modificarDato(int, unsigned char);
     int getTamanio() const;
     Memoria &getMemoria();
 

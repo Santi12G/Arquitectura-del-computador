@@ -46,34 +46,62 @@ void Controlador::guardarCacheEnArchivo(const string &nombreArchivo)
 
 bool Controlador::procesarOperacion(int direccion, bool esEscritura, unsigned char dato)
 {
+    bool esHit = false; // Variable para almacenar si hubo hit o no
     if (esEscritura)
     {
         cout << "Escribiendo en la memoria...\n";
-        bool esHit = cache.escribir(direccion, dato);
+        esHit = cache.escribir(direccion, dato);
 
         if (esHit)
         {
+            // cout << "PREVIUS OF SET DATO\n";
+            cache.setDato(direccion / 16, direccion % 16, dato); // Escribir dato en la caché
+            cache.actualizarLRU(direccion);                      // Actualizar LRU si hubo hit
             // Leer el bloque correspondiente desde la memoria principal
-            vector<unsigned int> bloque = memoria.obtenerBloque(direccion / 16);
+            // vector<unsigned int> bloque = memoria.obtenerBloque(direccion / 16);
 
-            cache.subirBloque(bloque, direccion / 16); // Subir bloque a la caché
+            // cache.subirBloque(bloque, direccion / 16); // Subir bloque a la caché
 
             //
         }
+        else
+        {
+            cout << "LEYENDO RAM PARA ESCRITURA...\n";
+            cout << "Leyendo de la memoria DRAM...\n";
+            // Leer el bloque correspondiente desde la memoria principal
+            vector<unsigned int> bloque = memoria.obtenerBloque(direccion / 16);
+            cout << "Datos leidos de la memoria DRAM: " << endl;
+            for (unsigned int dato : bloque)
+            {
+                cout << hex << static_cast<int>(dato) << " ";
+            }
+            cout << endl;
+            string op = "WRITE"; // Operacion de escritura
 
-        return esHit; // Retornar si hubo miss
+            cache.subirBloque(bloque, direccion);                // Subir bloque a la caché
+            cache.setDato(direccion / 16, direccion % 16, dato); // Escribir dato en la caché
+        }
+        memoria.modificarDato(direccion, dato); // Escribir dato en la memoria principal
     }
     else
     {
         cout << "Leyendo de la memoria cache...\n";
-        bool esHit = cache.leer(direccion);
+        cout << "direccion directa de DRAM: " << static_cast<int>(direccion) << endl;
+        esHit = cache.leer(direccion);
 
         if (!esHit)
         {
             cout << "Leyendo de la memoria DRAM...\n";
             // Leer el bloque correspondiente desde la memoria principal
             vector<unsigned int> bloque = memoria.obtenerBloque(direccion / 16);
+            cout << "Datos leidos de la memoria DRAM: " << endl;
+            for (unsigned int dato : bloque)
+            {
+                cout << hex << static_cast<int>(dato) << " ";
+            }
+            cout << endl;
 
+            /*
             cout << "En funcion controlador, bloque leido: " << endl;
 
             for (unsigned int dato : bloque)
@@ -81,13 +109,20 @@ bool Controlador::procesarOperacion(int direccion, bool esEscritura, unsigned ch
                 cout << hex << static_cast<int>(dato) << " ";
             }
             cout << endl;
-            // Subir el bloque a la caché
-            cout << "Direccion a subir: " << direccion << endl;
-            cache.subirBloque(bloque, direccion / 16);
-        }
 
-        return esHit; // Retornar si hubo hit
+            // Subir el bloque a la caché
+            cout << "Direccion a subir: " << direccion << endl;*/
+            string op = "READ"; // Operacion de lectura
+            cache.subirBloque(bloque, direccion);
+        }
+        else
+        {
+            cache.actualizarLRU(direccion); // Actualizar LRU si hubo hit
+        }
+        cout << "POST POLITICA LRU: " << cache.lruPolicy.front() << endl;
+        cout << "TAMANIO POLITICA LRU: " << dec << static_cast<int>(cache.lruPolicy.size()) << endl;
     }
+    return esHit; // Retornar si hubo hit
 }
 
 void Controlador::mostrarResultados()
@@ -125,11 +160,9 @@ void Controlador::imprimirMemoria() const
         return;
     }
 
-    archivo << "Contenido de la Memoria:\n";
-
-    for (int i = 0; i < 128; i++)
+    for (long long int i = 0; i < 2032; i++)
     {
-        memoria.leerBloque(i, archivo); // imprime en archivo
+        memoria.leerDato(i, archivo); // imprime en archivo
     }
 
     archivo.close();

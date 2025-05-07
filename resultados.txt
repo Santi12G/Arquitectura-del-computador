@@ -1,4 +1,4 @@
 Resultados:
-Total accesos: 37
-Total misses: 33
-Tasa misses: 89.1892%
+Total accesos: 56
+Total misses: 35
+Tasa misses: 62.5%

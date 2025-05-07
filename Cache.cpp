@@ -45,14 +45,20 @@ int Cache::manageBloqueLibre()
 
 bool Cache::leer(unsigned int direccion)
 {
+    cout << "PRE POLITICA LRU: " << lruPolicy.front() << endl;
+    for (int i = 0; i < 32; i++)
+    {
+        cout << lruPolicy[i] << " ";
+    }
+    cout << endl;
     bool ans = false;
     conteoAccesos++;
-    int blockAddress = direccion >> 4; //
+    int blockAddress = direccion / 16; //
     int offset = direccion % 16;       //
     bool validBloque = false;
     int bloqueCache;
     cout << "Offset: " << offset << endl;
-    cout << "Direccion bloque: " << hex << static_cast<int>(blockAddress) << endl;
+    cout << "Direccion bloque: " << dec << static_cast<int>(blockAddress) << endl;
     for (int i = 0; i < 32 && !validBloque; i++)
     {
         if (bloques[i].getEtiqueta() == blockAddress)
@@ -67,7 +73,7 @@ bool Cache::leer(unsigned int direccion)
         // cout << "dato: " << hex << static_cast<int>((bloques[blockAddress]).getDato(offset)) << endl;
         ans = true; // Se encuentra el dato
         setEstado(HIT);
-        actualizarLRU(bloqueCache); // Actualiza el contador LRU   --> recordar que hay que implementarlo con un deque para ir metiendo los recientemente usados en la parte de atras
+        // actualizarLRU(bloqueCache); // Actualiza el contador LRU   --> recordar que hay que implementarlo con un deque para ir metiendo los recientemente usados en la parte de atras
     }
     else
     {
@@ -80,36 +86,71 @@ bool Cache::leer(unsigned int direccion)
     return ans;
 }
 
-void Cache::subirBloque(vector<unsigned int> &bloque, int direccionBloque)
+void Cache::subirBloque(vector<unsigned int> &bloque, int direccionBase)
 {
-    int bloqueReemplazo = 0; // Inicializa el bloque a reemplazar
+    // cout << "DIRECCION ACTUALIZAR LRU EN SUBIR BLOQUE: " << direccionBase / 16 << endl;
+    // cout << "Politica LRU: " << lruPolicy.front() << endl;
+    int lruSize = static_cast<int>(lruPolicy.size());
+    cout << "Politica lru size: " << lruSize << endl;
+    cout << "lru < 32: " << (lruSize < 32) << endl;
+    int direccionBloque = direccionBase / 16; // Direccion del bloque
+    int etiquetaBloqueReemplazar;
+    int indiceReemplazar = 0; // Indice del bloque a reemplazar
+    bool llena = false;       // Variable para verificar si la cache no esta llena
+    if (lruSize == 32)
+    {
+        // cout << "FIRST REVISION" << endl;
+        llena = true;
+        etiquetaBloqueReemplazar = lruPolicy.front(); // Obtener el bloque menos usado
+        lruPolicy.pop_front();                        // Eliminar el bloque menos usado
+        lruPolicy.push_back(direccionBloque);         // Agregar el bloque a la politica LRU
+    }
+    else if (lruSize < 32 && !llena && lruSize != 0)
+    {
+        cout << "SECOND REVISION" << endl;
+        // cout << "cache no llena" << endl;
+        lruPolicy.push_back(direccionBloque); // Agregar el bloque a la politica LRU
+        // cout << "Politica LRU: " << lruPolicy.front() << endl;
+        etiquetaBloqueReemplazar = -1; // Obtener el bloque menos usado
+    }
 
-    for (int i = 0; i < 16; i++)
+    if (lruSize <= 32 && lruSize != 0)
     {
-        cout << hex << static_cast<int>(bloque[i]) << " ";
+        // cout << "THIRD REVISION" << endl;
+        bool terminado = false;
+        for (int i = 0; i < 32 && !terminado; i++)
+        {
+            if (bloques[i].getEtiqueta() == etiquetaBloqueReemplazar)
+            {
+                cout << "Etiqueta bloque reemplazar: " << etiquetaBloqueReemplazar << endl;
+                indiceReemplazar = i; // Obtener el bloque menos usado
+                terminado = true;
+            }
+        }
+        bloques[indiceReemplazar].setDatos(bloque);           // Subir bloque a cache
+        bloques[indiceReemplazar].setEtiqueta(direccionBase); // Etiqueta del bloque
+        bloques[indiceReemplazar].setValido(true);
+        // cout << "Politica lru third revision: " << lruPolicy.front() << endl;
     }
-    int estado = -1;
-    if (estadoActual == MISS && bloqueLibre <= 32)
+    if (lruSize == 0)
     {
-        this->bloques[bloqueLibre].setDatos(bloque);             // Subir bloque a cache
-        this->bloques[bloqueLibre].setEtiqueta(direccionBloque); // Etiqueta del bloque
-        this->bloques[bloqueLibre].setContadorLRU(0);            // Contador LRU a 0
-        this->bloques[bloqueLibre].setValido(true);              // Bloque valido
-        estado = manageBloqueLibre();
-        cout << "Subiendo bloque a cache: " << direccionBloque << endl;
+        bloques[0].setDatos(bloque);           // Subir bloque a cache
+        bloques[0].setEtiqueta(direccionBase); // Etiqueta del bloque
+        bloques[0].setValido(true);
+        lruPolicy.push_back(direccionBase);
+        // cout << "Terminado el reemplazo del bloque " << etiquetaBloqueReemplazar << " por el bloque " << direccionBase << endl;
     }
-    if (estado == REEMPLAZO)
+
+    /*cout << "TOMANDO DATOS DE LA CACHE " << endl;
+    for (int i = 0; i < 32; i++)
     {
-        cout << "Cache llena, reemplazando bloque..." << endl;
-        bloqueReemplazo = encontrarReemplazo();                // Reemplazar el bloque menos usado
-        bloques[bloqueReemplazo].setDatos(bloque);             // Subir bloque a cache
-        bloques[bloqueReemplazo].setEtiqueta(direccionBloque); // Etiqueta del bloque
-        bloques[bloqueReemplazo].setContadorLRU(0);            // Contador LRU a 0
-        bloques[bloqueReemplazo].setValido(true);              // Bloque valido
-        bloques[bloqueReemplazo].restartLRU();                 // Reiniciar el contador LRU
-        cout << "Subiendo bloque a cache: " << bloqueReemplazo << endl;
-        cout << "Etiqueta bloque reemplazo: " << bloques[bloqueReemplazo].getEtiqueta() << endl;
+
+    for (const auto &dato : bloques[i].getDatos())
+    {
+        cout << hex << static_cast<int>(dato) << " ";
     }
+    cout << endl;
+    }*/
 }
 
 bool Cache::escribir(int direccion, unsigned int nuevoD)
@@ -134,35 +175,36 @@ bool Cache::escribir(int direccion, unsigned int nuevoD)
     if (validBloque)
     {
         // cout << "Bloque valido: " << validBloque << endl;
-        setDato(bloqueCache, offset, nuevoD); // Escribir dato en la cache
-        cout << "Escribiendo en la cache: " << hex << static_cast<int>(nuevoD) << endl;
+        // setDato(bloqueCache, offset, nuevoD); // Escribir dato en la cache
+        // cout << "Escribiendo en la cache: " << hex << static_cast<int>(nuevoD) << endl;
         ans = true; // Se encuentra el dato
         setEstado(HIT);
-        actualizarLRU(bloqueCache); // Actualiza el contador LRU
+        // actualizarLRU(bloqueCache); // Actualiza el contador LRU revisar el actualizar LRU
         conteoAccesos++;
     }
     else
     {
         cout << "No se encuentra el bloque en la cache" << endl;
         setEstado(MISS);
+        // subirBloque(bloques[bloqueCache].getDatos(), blockAddress); // Subir bloque a cache
+        // setDato(bloqueCache, offset, nuevoD);                       // Escribir dato en la cache
+        //  actualizarLRU(bloqueCache);                                 // Actualiza el contador LRU no funciona aun
         conteoMisses++;
         ans = false; // No se encuentra el dato
     }
-
+    cout << "Saliendo funcion escribir cache interna" << endl;
     return ans;
 }
-
-// bool Cache::escribir(int direccion, unsigned char nuevoDato) {}
 
 void Cache::guardarEnArchivo(const string &nombreArchivo)
 {
     ofstream archivo(nombreArchivo);
     if (archivo.is_open())
     {
-        archivo << "Contenido de la Caché:\n";
+        archivo << "Contenido de la Cache:\n";
         for (const auto &bloque : this->bloques)
         {
-            archivo << "Etiqueta: " << hex << bloque.getEtiqueta();
+            archivo << "Etiqueta: " << dec << bloque.getEtiqueta();
             archivo << " | LRU: " << dec << bloque.getContadorLRU() << "\n";
 
             for (const auto &dato : bloque.getDatos())
@@ -226,28 +268,25 @@ const Bloque &Cache::getBloque(int indice) const
     return bloques[indice];
 }
 
-void Cache::actualizarLRU(int indice)
+void Cache::actualizarLRU(int direccionBase)
 {
-    /*int erasePosition = -1;
-    bool found = false;
-    if (lruPolicy.size() != 0)
+    int direccionBloqueLRU = direccionBase / 16;
+    auto it = lruPolicy.begin();
+    while (it != lruPolicy.end())
     {
-        for (int i = 0; i < this->bloques.size() && !found; i++)
+        if (*it == direccionBloqueLRU)
         {
-            if (this->bloques[i].getEtiqueta() == indice)
-            {
-                erasePosition = i; // Encuentra la posicion del bloque a eliminar
-                found = true;
-            }
+            lruPolicy.erase(it);
+            it = lruPolicy.end();
         }
-        erase
-    }*/
-    if (estadoActual == HIT)
-        bloques[indice].setContadorLRU(1);
-    // Reinicia el contador LRU
-    else if (estadoActual == MISS)
-        bloques[indice].restartLRU();
+        else
+        {
+            ++it;
+        }
+    }
+    lruPolicy.push_back(direccionBloqueLRU); // Agregar el bloque a la politica LRU
 }
+
 int Cache::getConteoAccesos() const
 {
     return conteoAccesos;
@@ -260,11 +299,17 @@ int Cache::getConteoMisses() const
 
 void Cache::setDato(int direccionBloque, int offset, unsigned int nuevoDato)
 {
+    cout << "direccion bloque: " << dec << direccionBloque << endl;
+    cout << "Setting dato en la cache: " << hex << static_cast<int>(nuevoDato) << endl;
+    cout << "offset: " << offset << endl;
     for (int i = 0; i < 32; i++)
     {
         if (bloques[i].getEtiqueta() == direccionBloque)
         {
+            cout << "Se encontro el bloque " << bloques[i].getEtiqueta() << " en la memoria cache" << endl;
             bloques[i].setDato(offset, nuevoDato); // Escribir dato en la cache
+            cout << "Escribiendo en la cache: " << hex << static_cast<int>(nuevoDato) << endl;
         }
     }
+    // bloques[direccionBloque].setDato(offset, nuevoDato);
 }

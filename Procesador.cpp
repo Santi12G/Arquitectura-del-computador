@@ -59,7 +59,7 @@ void Procesador::leerArchivoOperaciones(const string &archivo)
     bool todoCorrecto = true;
     cout << "Leyendo archivo de operaciones: " << archivo << endl;
     cout << "----------------------------------------\n";
-    cout << "BOOL IS OPEN: " << entrada.is_open() << endl;
+    // cout << "BOOL IS OPEN: " << entrada.is_open() << endl;
     if (entrada.is_open())
     {
         string linea_limpia;
@@ -76,14 +76,14 @@ void Procesador::leerArchivoOperaciones(const string &archivo)
 
                 stream >> tipoOperacion >> dirStr;
                 direccion = stringANumero(dirStr);
-                cout << "TIPO OPERACION: " << tipoOperacion << endl;
-                cout << "DIRECCION: " << dirStr << endl;
+                // cout << "TIPO OPERACION: " << tipoOperacion << endl;
+                // cout << "DIRECCION: " << dirStr << endl;
                 if (tipoOperacion == "WRITE")
                 {
                     if (stream >> datoStr)
                     {
                         dato = stringANumero(datoStr);
-                        controlador.procesarOperacion(direccion, true, static_cast<unsigned char>(dato));
+                        // cout << "DATO: " << datoStr << endl;
                     }
                     else
                     {
@@ -96,7 +96,7 @@ void Procesador::leerArchivoOperaciones(const string &archivo)
                 }
 
                 if (direccion >= 0 || dirStr == "0")
-                { // Validación básica
+                {
                     cout << "Direccion: " << dec << direccion << endl;
                     bool esHit = controlador.procesarOperacion(
                         direccion,
