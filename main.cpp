@@ -1,6 +1,7 @@
 #include "Procesador.h"
 #include <iostream>
 #include <string>
+#include <cstdlib>
 
 using namespace std;
 
@@ -26,6 +27,13 @@ int main()
     // @Memoria: guardar contenido luego de procesar todas las operaciones
 
     procesador.exportarResultados("resultados.txt"); // Exportar resultados a un archivo
+
+    int resultado = system("python graficar_tasaMisses.py resultados.txt"); // Ejecutar el script de Python para graficar
+
+    if (resultado != 0)
+    {
+        std::cerr << "Error al ejecutar el script de Python." << std::endl;
+    }
     /*
 
 
